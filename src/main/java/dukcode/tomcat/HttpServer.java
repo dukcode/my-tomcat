@@ -36,20 +36,17 @@ public class HttpServer {
         }
 
         while (!shutdown) {
-            Socket socket = null;
-            InputStream input = null;
-            OutputStream output = null;
-            try {
-                socket = serverSocket.accept();
-                input = socket.getInputStream();
-                output = socket.getOutputStream();
+            try (Socket socket = serverSocket.accept();
+                    InputStream input = socket.getInputStream();
+                    OutputStream output = socket.getOutputStream()) {
 
                 Request request = new Request(input);
                 request.parse();
 
-                output.write("Hello World!!!\n\n".getBytes());
+                Response response = new Response(output);
+                response.setRequest(request);
+                response.sendStaticResource();
 
-                socket.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
