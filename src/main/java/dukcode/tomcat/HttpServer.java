@@ -47,6 +47,7 @@ public class HttpServer {
                 response.setRequest(request);
                 response.sendStaticResource();
 
+                shutdown = request.getUri().equals(SHUTDOWN_COMMAND);
             } catch (IOException e) {
                 e.printStackTrace();
             }
