@@ -47,7 +47,8 @@ public class HttpServer {
                 response.setRequest(request);
 
                 if (request.getUri().startsWith("/servlet/")) {
-                    // TODO: servlet request 처리 구현
+                    ServletProcessor processor = new ServletProcessor();
+                    processor.process(request, response);
                 } else {
                     StaticResourceProcessor processor = new StaticResourceProcessor();
                     processor.process(request, response);
