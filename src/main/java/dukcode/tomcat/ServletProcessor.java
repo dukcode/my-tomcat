@@ -1,7 +1,9 @@
 package dukcode.tomcat;
 
 import dukcode.tomcat.request.Request;
+import dukcode.tomcat.request.RequestFacade;
 import dukcode.tomcat.response.Response;
+import dukcode.tomcat.response.ResponseFacade;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -41,10 +43,12 @@ public class ServletProcessor {
         }
 
         Servlet servlet = null;
+        ServletRequest reqFacade = new RequestFacade(req);
+        ServletResponse resFacade = new ResponseFacade(res);
 
         try {
             servlet = (Servlet) myClass.getConstructor().newInstance();
-            servlet.service((ServletRequest) req, (ServletResponse) res);
+            servlet.service((ServletRequest) reqFacade, (ServletResponse) resFacade);
         } catch (Exception e) {
             e.printStackTrace();
         }
