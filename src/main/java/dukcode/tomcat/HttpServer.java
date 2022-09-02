@@ -45,7 +45,13 @@ public class HttpServer {
 
                 Response response = new Response(output);
                 response.setRequest(request);
-                response.sendStaticResource();
+
+                if (request.getUri().startsWith("/servlet/")) {
+                    // TODO: servlet request 처리 구현
+                } else {
+                    StaticResourceProcessor processor = new StaticResourceProcessor();
+                    processor.process(request, response);
+                }
 
                 shutdown = request.getUri().equals(SHUTDOWN_COMMAND);
             } catch (IOException e) {
