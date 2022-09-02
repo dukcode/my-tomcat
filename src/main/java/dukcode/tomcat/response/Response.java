@@ -1,6 +1,6 @@
 package dukcode.tomcat.response;
 
-import dukcode.tomcat.HttpServer;
+import dukcode.tomcat.http.constant.Constants;
 import dukcode.tomcat.request.Request;
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,7 +29,7 @@ public class Response implements ServletResponse {
     public void sendStaticResource() {
         byte[] buffer = new byte[BUFFER_SIZE];
 
-        File file = new File(HttpServer.WEB_ROOT, request.getUri());
+        File file = new File(Constants.WEB_ROOT, request.getUri());
         if (file.exists()) {
             try (FileInputStream fis = new FileInputStream(file)) {
                 int count = 0;

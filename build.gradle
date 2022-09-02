@@ -13,6 +13,7 @@ dependencies {
 //    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.10'
     implementation group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
 //    implementation group: 'jstl', name: 'jstl', version: '1.2'
+    implementation 'org.apache.tomcat:tomcat-util:10.0.23'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'

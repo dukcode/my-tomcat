@@ -1,5 +1,6 @@
 package dukcode.tomcat;
 
+import dukcode.tomcat.http.constant.Constants;
 import dukcode.tomcat.request.Request;
 import dukcode.tomcat.request.RequestFacade;
 import dukcode.tomcat.response.Response;
@@ -23,7 +24,7 @@ public class ServletProcessor {
 
         try {
             URL[] urls = new URL[1];
-            File classPath = new File(HttpServer.WEB_ROOT);
+            File classPath = new File(Constants.WEB_ROOT);
 
             String repository = (new URL("file", null,
                     classPath.getCanonicalPath() + File.separator)).toString();
