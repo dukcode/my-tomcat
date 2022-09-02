@@ -1,5 +1,7 @@
 package dukcode.tomcat;
 
+import dukcode.tomcat.request.Request;
+import dukcode.tomcat.response.Response;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
