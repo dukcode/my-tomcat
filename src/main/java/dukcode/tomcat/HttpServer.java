@@ -1,5 +1,7 @@
 package dukcode.tomcat;
 
+import dukcode.tomcat.request.Request;
+import dukcode.tomcat.response.Response;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,7 +47,14 @@ public class HttpServer {
 
                 Response response = new Response(output);
                 response.setRequest(request);
-                response.sendStaticResource();
+
+                if (request.getUri().startsWith("/servlet/")) {
+                    ServletProcessor processor = new ServletProcessor();
+                    processor.process(request, response);
+                } else {
+                    StaticResourceProcessor processor = new StaticResourceProcessor();
+                    processor.process(request, response);
+                }
 
                 shutdown = request.getUri().equals(SHUTDOWN_COMMAND);
             } catch (IOException e) {
