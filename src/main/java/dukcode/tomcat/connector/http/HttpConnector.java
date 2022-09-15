@@ -15,26 +15,22 @@ public class HttpConnector implements Runnable {
     @Override
     public void run() {
 
-        ServerSocket serverSocket = null;
-        try {
-            serverSocket = new ServerSocket(Constants.BASIC_PORT,
-                    1, InetAddress.getByName("127.0.0.1"));
+        try (ServerSocket serverSocket = new ServerSocket(Constants.BASIC_PORT,
+                1, InetAddress.getByName("127.0.0.1"));) {
+            while (true) {
+                try (Socket socket = serverSocket.accept()) {
+                    HttpProcessor processor = new HttpProcessor(this);
+                    processor.process(socket);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
         }
 
-        while (true) {
-            Socket socket = null;
-            try {
-                socket = serverSocket.accept();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            HttpProcessor processor = new HttpProcessor(this);
-            processor.process(socket);
-        }
     }
 
 }
