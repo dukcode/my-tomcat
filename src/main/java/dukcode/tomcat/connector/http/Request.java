@@ -1,11 +1,13 @@
-package dukcode.tomcat.request;
+package dukcode.tomcat.connector.http;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
+import java.util.StringTokenizer;
 import javax.servlet.AsyncContext;
 import javax.servlet.DispatcherType;
 import javax.servlet.RequestDispatcher;
@@ -14,157 +16,186 @@ import javax.servlet.ServletInputStream;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-public class RequestFacade implements ServletRequest {
+public class Request implements ServletRequest {
 
-    private ServletRequest request;
+    private static final int BUFFER_SIZE = 2048;
 
-    public RequestFacade(Request request) {
-        this.request = request;
+    private final InputStream input;
+    private String uri;
+
+    public Request(InputStream input) {
+        this.input = input;
+    }
+
+    public void parse() {
+        byte[] buffer = new byte[BUFFER_SIZE];
+
+        try {
+            int count = input.read(buffer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String requestString = new String(buffer);
+        System.out.print(requestString);
+        uri = parseUri(requestString);
+    }
+
+    private String parseUri(String requestString) {
+        StringTokenizer st = new StringTokenizer(requestString);
+        String method = st.nextToken();
+        String uri = st.nextToken();
+
+        return uri;
+    }
+
+    public String getUri() {
+        return uri;
     }
 
     @Override public Object getAttribute(String name) {
-        return request.getAttribute(name);
+        return null;
     }
 
     @Override public Enumeration<String> getAttributeNames() {
-        return request.getAttributeNames();
+        return null;
     }
 
     @Override public String getCharacterEncoding() {
-        return request.getCharacterEncoding();
+        return null;
     }
 
     @Override public void setCharacterEncoding(String env) throws UnsupportedEncodingException {
-        request.setCharacterEncoding(env);
+
     }
 
     @Override public int getContentLength() {
-        return request.getContentLength();
+        return 0;
     }
 
     @Override public String getContentType() {
-        return request.getContentType();
+        return null;
     }
 
     @Override public ServletInputStream getInputStream() throws IOException {
-        return request.getInputStream();
+        return null;
     }
 
     @Override public String getParameter(String name) {
-        return request.getParameter(name);
+        return null;
     }
 
     @Override public Enumeration<String> getParameterNames() {
-        return request.getParameterNames();
+        return null;
     }
 
     @Override public String[] getParameterValues(String name) {
-        return request.getParameterValues(name);
+        return new String[0];
     }
 
     @Override public Map<String, String[]> getParameterMap() {
-        return request.getParameterMap();
+        return null;
     }
 
     @Override public String getProtocol() {
-        return request.getProtocol();
+        return null;
     }
 
     @Override public String getScheme() {
-        return request.getScheme();
+        return null;
     }
 
     @Override public String getServerName() {
-        return request.getServerName();
+        return null;
     }
 
     @Override public int getServerPort() {
-        return request.getServerPort();
+        return 0;
     }
 
     @Override public BufferedReader getReader() throws IOException {
-        return request.getReader();
+        return null;
     }
 
     @Override public String getRemoteAddr() {
-        return request.getRemoteAddr();
+        return null;
     }
 
     @Override public String getRemoteHost() {
-        return request.getRemoteHost();
+        return null;
     }
 
     @Override public void setAttribute(String name, Object o) {
-        request.setAttribute(name, o);
+
     }
 
     @Override public void removeAttribute(String name) {
-        request.removeAttribute(name);
+
     }
 
     @Override public Locale getLocale() {
-        return request.getLocale();
+        return null;
     }
 
     @Override public Enumeration<Locale> getLocales() {
-        return request.getLocales();
+        return null;
     }
 
     @Override public boolean isSecure() {
-        return request.isSecure();
+        return false;
     }
 
     @Override public RequestDispatcher getRequestDispatcher(String path) {
-        return request.getRequestDispatcher(path);
+        return null;
     }
 
     @Override public String getRealPath(String path) {
-        return request.getRealPath(path);
+        return null;
     }
 
     @Override public int getRemotePort() {
-        return request.getRemotePort();
+        return 0;
     }
 
     @Override public String getLocalName() {
-        return request.getLocalName();
+        return null;
     }
 
     @Override public String getLocalAddr() {
-        return request.getLocalAddr();
+        return null;
     }
 
     @Override public int getLocalPort() {
-        return request.getLocalPort();
+        return 0;
     }
 
     @Override public ServletContext getServletContext() {
-        return request.getServletContext();
+        return null;
     }
 
     @Override public AsyncContext startAsync() throws IllegalStateException {
-        return request.startAsync();
+        return null;
     }
 
     @Override
     public AsyncContext startAsync(ServletRequest servletRequest, ServletResponse servletResponse)
             throws IllegalStateException {
-        return request.startAsync(servletRequest, servletResponse);
+        return null;
     }
 
     @Override public boolean isAsyncStarted() {
-        return request.isAsyncStarted();
+        return false;
     }
 
     @Override public boolean isAsyncSupported() {
-        return request.isAsyncSupported();
+        return false;
     }
 
     @Override public AsyncContext getAsyncContext() {
-        return request.getAsyncContext();
+        return null;
     }
 
     @Override public DispatcherType getDispatcherType() {
-        return request.getDispatcherType();
+        return null;
     }
 }

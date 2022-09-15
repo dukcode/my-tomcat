@@ -1,10 +1,10 @@
 package dukcode.tomcat;
 
-import dukcode.tomcat.http.constant.Constants;
-import dukcode.tomcat.request.Request;
-import dukcode.tomcat.request.RequestFacade;
-import dukcode.tomcat.response.Response;
-import dukcode.tomcat.response.ResponseFacade;
+import dukcode.tomcat.connector.http.Constants;
+import dukcode.tomcat.connector.http.Request;
+import dukcode.tomcat.connector.http.RequestFacade;
+import dukcode.tomcat.connector.http.Response;
+import dukcode.tomcat.connector.http.ResponseFacade;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;

@@ -1,7 +1,7 @@
 package dukcode.tomcat;
 
-import dukcode.tomcat.request.Request;
-import dukcode.tomcat.response.Response;
+import dukcode.tomcat.connector.http.Request;
+import dukcode.tomcat.connector.http.Response;
 
 public class StaticResourceProcessor {
 

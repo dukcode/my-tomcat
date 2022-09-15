@@ -1,10 +1,7 @@
-package dukcode.tomcat.http.processor;
+package dukcode.tomcat.connector.http;
 
 import dukcode.tomcat.ServletProcessor;
 import dukcode.tomcat.StaticResourceProcessor;
-import dukcode.tomcat.http.connector.HttpConnector;
-import dukcode.tomcat.request.Request;
-import dukcode.tomcat.response.Response;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;

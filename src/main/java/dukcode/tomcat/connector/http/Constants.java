@@ -1,4 +1,4 @@
-package dukcode.tomcat.http.constant;
+package dukcode.tomcat.connector.http;
 
 import java.io.File;
 

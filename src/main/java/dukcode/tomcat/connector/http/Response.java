@@ -1,7 +1,5 @@
-package dukcode.tomcat.response;
+package dukcode.tomcat.connector.http;
 
-import dukcode.tomcat.http.constant.Constants;
-import dukcode.tomcat.request.Request;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;

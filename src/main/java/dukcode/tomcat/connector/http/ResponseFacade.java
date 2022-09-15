@@ -1,4 +1,4 @@
-package dukcode.tomcat.response;
+package dukcode.tomcat.connector.http;
 
 import java.io.IOException;
 import java.io.PrintWriter;

@@ -1,7 +1,5 @@
-package dukcode.tomcat.http.connector;
+package dukcode.tomcat.connector.http;
 
-import dukcode.tomcat.http.constant.Constants;
-import dukcode.tomcat.http.processor.HttpProcessor;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;

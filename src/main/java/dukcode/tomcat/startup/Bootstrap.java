@@ -1,6 +1,6 @@
 package dukcode.tomcat.startup;
 
-import dukcode.tomcat.http.connector.HttpConnector;
+import dukcode.tomcat.connector.http.HttpConnector;
 
 public class Bootstrap {
 
