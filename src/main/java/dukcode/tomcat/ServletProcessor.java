@@ -1,23 +1,21 @@
 package dukcode.tomcat;
 
 import dukcode.tomcat.connector.http.Constants;
-import dukcode.tomcat.connector.http.Request;
-import dukcode.tomcat.connector.http.RequestFacade;
-import dukcode.tomcat.connector.http.Response;
-import dukcode.tomcat.connector.http.ResponseFacade;
+import dukcode.tomcat.connector.http.HttpRequest;
+import dukcode.tomcat.connector.http.HttpRequestFacade;
+import dukcode.tomcat.connector.http.HttpResponse;
+import dukcode.tomcat.connector.http.HttpResponseFacade;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.net.URLStreamHandler;
 import javax.servlet.Servlet;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 
 public class ServletProcessor {
 
-    public void process(Request req, Response res) {
-        String uri = req.getUri();
+    public void process(HttpRequest req, HttpResponse res) {
+        String uri = req.getRequestURI();
         String servletName = uri.substring(uri.lastIndexOf('/') + 1);
 
         URLClassLoader loader = null;
@@ -44,12 +42,13 @@ public class ServletProcessor {
         }
 
         Servlet servlet = null;
-        ServletRequest reqFacade = new RequestFacade(req);
-        ServletResponse resFacade = new ResponseFacade(res);
+        HttpRequestFacade reqFacade = new HttpRequestFacade(req);
+        HttpResponseFacade resFacade = new HttpResponseFacade(res);
 
         try {
             servlet = (Servlet) myClass.getConstructor().newInstance();
-            servlet.service((ServletRequest) reqFacade, (ServletResponse) resFacade);
+            servlet.service(reqFacade, resFacade);
+            res.finishResponse();
         } catch (Exception e) {
             e.printStackTrace();
         }
